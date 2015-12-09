@@ -357,6 +357,7 @@ rmr.stream =
     output = paste.options(output = out.folder)
     input.format.opt = paste.options(inputformat = input.format$streaming.format)
     output.format.opt = paste.options(outputformat = output.format$streaming.format)
+    cmdenv = paste(" -cmdenv ", "PATH=", Sys.getenv("PATH")," ", sep="") 
     stream.map.input = 
       if(input.format$mode == "binary") {
         paste.options(D = "stream.map.input=typedbytes")}
@@ -428,7 +429,8 @@ rmr.stream =
         combiner,
         reducer, 
         input.format.opt, 
-        output.format.opt, 
+        output.format.opt,
+        cmdenv,
         "2>&1")
     if(verbose) {
       retval = system(final.command)
